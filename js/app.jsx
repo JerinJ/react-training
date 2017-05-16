@@ -1,20 +1,82 @@
 var App = React.createClass({
     render: function() {
-        return (<div className="myClass" data-max="23">Jerin</div>);
+        var trainingData = {
+            name: 'React JS',
+            tech: 'FET',
+            company: 'Cybage'
+        };
+        return (
+            <div>
+                <Header training={trainingData.name} />
+                <Content tech={trainingData.tech}/>
+                <Footer company={trainingData.company}/>
+            </div>
+        );
     }
 });
-
-
-var MyName = React.createClass({
+var Header = React.createClass({
+    getInitialState: function() {
+        return {
+            status: 'biginner'
+        };
+    },
     render: function() {
-        return (<div className="myId" data-min="20">sdsdsd</div>);
+        return (
+            <header>
+                <h1>{this.props.training} tutorial</h1>
+                <h3>{this.state.status}</h3>
+            </header>
+        );
     }
 });
-
+var Content = React.createClass({
+    getDefaultProps: function() {
+        return {
+            trainner: 'Pratik'
+        }
+    },
+    getInitialState: function() {
+        return {
+            duration: 1.5
+        }
+    },
+    propTypes: {
+        tech: React.PropTypes.string.isRequired
+    },
+    _onInputChnage: function(e) {
+        this.setState({
+            duration: e.target.value
+        });
+    },
+    render: function() {
+        return (
+            <section>
+                <div>
+                    Technology used: {this.props.tech}
+                </div>
+                <div>
+                    Trainner: {this.props.trainner}
+                </div>
+                <div>
+                    Duration: {this.state.duration} Hr
+                </div>
+                <div>
+                    Give duration: <input type="text" onChange={this._onInputChnage}/>
+                </div>
+            </section>
+        );
+    }
+});
+var Footer = React.createClass({
+    render: function() {
+        return (
+            <footer>
+                @{this.props.company} copyrights
+            </footer>
+        );
+    }
+});
 ReactDOM.render(
-    <div>
-        <App />
-        <My-name />
-    </div>,
+    <App training="React"/>,
     document.getElementById('continer')
 );
