@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/JerinJ/react-training#readme",
   "dependencies": {
+    "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
