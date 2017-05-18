@@ -44,7 +44,9 @@ var Rowdata = React.createClass({
 var Content = React.createClass({
     getInitialState: function() {
         return {
-            tableData: []
+            tableData: [],
+            actualData: [],
+            noData: 6
         };
     },
     componentDidMount: function() {
@@ -52,13 +54,49 @@ var Content = React.createClass({
         $.getJSON('/resource/table.json', function (obj) {
             console.log('jerin', obj);
             self.setState({
-                tableData: obj.ItemList
+                tableData: obj.ItemList,
+                actualData: obj.ItemList
             });
         });
     },
+    _onSearchClick: function() {
+        console.log('jerin value:', this.refs.searchText.value);
+        var results = [];
+        var entry;
+
+        var searchText = this.refs.searchText.value.toUpperCase();
+        if(searchText.length > 0) {
+            for (var index = 0; index < this.state.actualData.length; index++) {
+                entry = this.state.actualData[index];
+                if (entry && entry.Value && entry.Value.toString().toUpperCase().indexOf(searchText) !== -1) {
+                    results.push(entry);
+                } else if (entry && entry.DisplayOrder && entry.DisplayOrder.toString().toUpperCase().indexOf(searchText) !== -1) {
+                    results.push(entry);
+                } else if (entry && entry.ValueByLabel && entry.ValueByLabel.toString().toUpperCase().indexOf(searchText) !== -1) {
+                    results.push(entry);
+                } else if (entry && entry.ValueType && entry.ValueType.toString().toUpperCase().indexOf(searchText) !== -1) {
+                    results.push(entry);
+                } else if (entry && entry.label && entry.label.toString().toUpperCase().indexOf(searchText) !== -1) {
+                    results.push(entry);
+                }
+            }
+            this.setState({
+                tableData: results
+            });
+        } else {
+            this.setState({
+                tableData: this.state.actualData
+            });
+        }
+    },
     render: function() {
+        var self = this;
         return (
             <div>
+                <div className="input-group">
+                    <input type="text" className="form-control" placeholder="Search" aria-describedby="basic-addon2" ref="searchText"/>
+                    <span className="input-group-addon" id="basic-addon2" onClick={this._onSearchClick}>Search</span>
+                </div>
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -70,11 +108,19 @@ var Content = React.createClass({
                         </tr> 
                     </thead>
                     <tbody>
-                        {this.state.tableData.map(function(object, i){
-                            return (
-                                <Rowdata key={i} rowValues={object} />
-                            );
-                        })}
+                        {
+                            self.state.tableData.length > 0 ? (
+                                self.state.tableData.map(function(object, i) {
+                                    return (
+                                        <Rowdata key={i} rowValues={object} />
+                                    );
+                                })
+                            ) : (
+                                <tr>
+                                    <td colSpan={6}>No data found</td>
+                                </tr>
+                            )
+                        }
                     </tbody> 
                 </table>
             </div>
