@@ -1,0 +1,130 @@
+{
+  "ItemList": [
+    {
+      "Value": 1,
+      "ValueByLabel": "Volume Effectiveness",
+      "label": "Volume",
+      "DisplayOrder": 2,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 2,
+      "ValueByLabel": "Revenue Effectiveness",
+      "label": "Revenue",
+      "DisplayOrder": 3,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 3,
+      "ValueByLabel": "Gross Margin Effectiveness",
+      "label": "Gross",
+      "DisplayOrder": 4,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 4,
+      "ValueByLabel": "Net Margin Effectiveness",
+      "label": "Net",
+      "DisplayOrder": 5,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 5,
+      "ValueByLabel": "Revenue Efficiency",
+      "label": "Revenue",
+      "DisplayOrder": 7,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 6,
+      "ValueByLabel": "Gross Margin Efficiency",
+      "label": "Gross",
+      "DisplayOrder": 8,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 7,
+      "ValueByLabel": "Net Margin Efficiency",
+      "label": "Net",
+      "DisplayOrder": 9,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 8,
+      "ValueByLabel": "Volume Efficiency",
+      "label": "Volume",
+      "DisplayOrder": 10,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 9,
+      "ValueByLabel": "Media CPM",
+      "label": "Media",
+      "DisplayOrder": 11,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 10,
+      "ValueByLabel": "Effective CPM",
+      "label": "Effective",
+      "DisplayOrder": 12,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 11,
+      "ValueByLabel": "Total Impressions",
+      "label": "Total",
+      "DisplayOrder": 13,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 12,
+      "ValueByLabel": "Audience Accuracy",
+      "label": "Audience",
+      "DisplayOrder": 14,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 13,
+      "ValueByLabel": "Location Accuracy",
+      "label": "Location",
+      "DisplayOrder": 15,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 14,
+      "ValueByLabel": "Inventory Quality",
+      "label": "Inventory",
+      "DisplayOrder": 16,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 15,
+      "ValueByLabel": "Effective Impressions",
+      "label": "Effective",
+      "DisplayOrder": 17,
+      "ValueType": "Return"
+    },
+    {
+      "Value": 16,
+      "ValueByLabel": "Average Frequency",
+      "label": "Average",
+      "DisplayOrder": 18,
+      "ValueType": "http://stackoverflow.com/questions/32817442/how-to-bind-data-from-getjson-to-reactjs-state"
+    },
+    {
+      "Value": 17,
+      "ValueByLabel": "Effective Reach",
+      "label": "Effective",
+      "DisplayOrder": 19,
+      "ValueType": "http://stackoverflow.com/questions/22876978/loop-inside-react-jsx"
+    },
+    {
+      "Value": 18,
+      "ValueByLabel": "Impact Score",
+      "label": "Impact",
+      "DisplayOrder": 20,
+      "ValueType": "https://jsfiddle.net/63nL7yfj/"
+    }
+  ]
+}
