@@ -1,19 +1,27 @@
 var App = React.createClass({
     displayName: 'App',
 
-    render: function () {
-        var formData = {
+    getInitialState: function () {
+        return {
             firstName: 'Jeerin',
             lastName: 'John',
             company: 'Cybage',
             training: 'React JS'
         };
+    },
+    _onContentChnage: function (value) {
+        console.log(value);
+        this.setState({
+            firstName: value
+        });
+    },
+    render: function () {
         return React.createElement(
             'div',
             { className: 'col-md-12' },
-            React.createElement(Header, { training: formData.training }),
-            React.createElement(Content, { formData: formData }),
-            React.createElement(Footer, { company: formData.company })
+            React.createElement(Header, { training: this.state.training }),
+            React.createElement(Content, { formData: this.state, inputChange: this._onContentChnage }),
+            React.createElement(Footer, { company: this.state.firstName })
         );
     }
 });
@@ -71,6 +79,12 @@ var Content = React.createClass({
             lastName: this.refs.lastName.value
         });
     },
+    _onFirstName: function (e) {
+        this.props.inputChange(e.target.value);
+        this.setState({
+            firstName: e.target.value
+        });
+    },
     render: function () {
         return React.createElement(
             'div',
@@ -86,7 +100,7 @@ var Content = React.createClass({
                         { 'for': 'firstName' },
                         'First Name'
                     ),
-                    React.createElement('input', { type: 'text', className: 'form-control', id: 'firstName', placeholder: 'First Name', value: 'test', ref: 'firstName' })
+                    React.createElement('input', { type: 'text', className: 'form-control', id: 'firstName', placeholder: 'First Name', value: this.state.firstName, onChange: this._onFirstName, ref: 'firstName' })
                 ),
                 React.createElement(
                     'div',
@@ -98,12 +112,18 @@ var Content = React.createClass({
                     ),
                     React.createElement('input', { type: 'text', className: 'form-control', id: 'lastName', placeholder: 'Last Name', ref: 'lastName' })
                 ),
+                React.createElement('br', null),
+                React.createElement('br', null),
                 React.createElement('input', { type: 'button', 'class': 'btn btn-default', onClick: this._onSave, value: 'Save' })
             ),
+            React.createElement('br', null),
+            React.createElement('br', null),
+            React.createElement('br', null),
             React.createElement(
                 'div',
                 null,
                 'Summary:',
+                React.createElement('br', null),
                 React.createElement(
                     'div',
                     { 'class': 'form-group' },
@@ -112,6 +132,7 @@ var Content = React.createClass({
                         null,
                         'First Name'
                     ),
+                    '\xA0\xA0',
                     React.createElement(
                         'span',
                         null,
@@ -126,6 +147,7 @@ var Content = React.createClass({
                         null,
                         'Last Name'
                     ),
+                    '\xA0\xA0',
                     React.createElement(
                         'span',
                         null,

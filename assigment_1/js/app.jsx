@@ -1,16 +1,24 @@
 var App = React.createClass({
-    render: function() {
-        var formData = {
+    getInitialState: function() {
+        return {
             firstName: 'Jeerin',
             lastName: 'John',
             company: 'Cybage',
             training: 'React JS'
         };
+    },
+    _onContentChnage: function(value) {
+        console.log(value);
+        this.setState({
+            firstName: value
+        });
+    },
+    render: function() {
         return (
             <div className="col-md-12">
-                <Header training={formData.training} />
-                <Content formData={formData}/>
-                <Footer company={formData.company}/>
+                <Header training={this.state.training} />
+                <Content formData={this.state} inputChange={this._onContentChnage}/>
+                <Footer company={this.state.firstName}/>
             </div>
         );
     }
@@ -56,28 +64,40 @@ var Content = React.createClass({
             lastName: this.refs.lastName.value,
         });
     },
+    _onFirstName: function(e) {
+        this.props.inputChange(e.target.value);
+        this.setState({
+            firstName: e.target.value
+        });
+    },
     render: function() {
         return (
             <div>
                 <form>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" className="form-control" id="firstName" placeholder="First Name" value="test" ref="firstName" />
+                        <input type="text" className="form-control" id="firstName" placeholder="First Name" value={this.state.firstName} onChange={this._onFirstName} ref="firstName" />
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
                         <input type="text" className="form-control" id="lastName" placeholder="Last Name" ref="lastName" />
                     </div>
+                    <br />
+                    <br />
                     <input type="button" class="btn btn-default" onClick={this._onSave} value="Save" />
                 </form>
+                <br />
+                <br />
+                <br />
                 <div>
                     Summary: 
+                    <br />
                      <div class="form-group">
-                        <label>First Name</label>
-                        <span >{this.state.firstName}</span>
+                        <label>First Name</label>&nbsp;&nbsp;
+                        <span>{this.state.firstName}</span>
                     </div>
                     <div class="form-group">
-                        <label>Last Name</label>
+                        <label>Last Name</label>&nbsp;&nbsp;
                         <span>{this.state.lastName}</span>
                     </div>
                 </div>

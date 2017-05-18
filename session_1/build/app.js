@@ -55,15 +55,23 @@ var Content = React.createClass({
             duration: 1.5
         };
     },
+    componentWillMount: function () {
+        console.log('componentWillMount');
+    },
+    componentDidMount: function () {
+        console.log('componentDidMount');
+    },
     propTypes: {
         tech: React.PropTypes.string.isRequired
     },
     _onInputChnage: function (e) {
+        console.log(e.target.value);
         this.setState({
             duration: e.target.value
         });
     },
     render: function () {
+        console.log('render');
         return React.createElement(
             'section',
             null,
@@ -90,7 +98,7 @@ var Content = React.createClass({
                 'div',
                 null,
                 'Give duration: ',
-                React.createElement('input', { type: 'text', onChange: this._onInputChnage })
+                React.createElement('input', { name: 'name', type: 'text', value: this.state.duration, onChange: this._onInputChnage })
             )
         );
     }

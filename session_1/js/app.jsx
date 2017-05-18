@@ -40,15 +40,23 @@ var Content = React.createClass({
             duration: 1.5
         }
     },
+    componentWillMount: function() {
+        console.log('componentWillMount');
+    },
+    componentDidMount: function() {
+        console.log('componentDidMount');
+    },
     propTypes: {
         tech: React.PropTypes.string.isRequired
     },
     _onInputChnage: function(e) {
+        console.log(e.target.value);
         this.setState({
             duration: e.target.value
         });
     },
     render: function() {
+        console.log('render');
         return (
             <section>
                 <div>
@@ -61,7 +69,7 @@ var Content = React.createClass({
                     Duration: {this.state.duration} Hr
                 </div>
                 <div>
-                    Give duration: <input type="text" onChange={this._onInputChnage}/>
+                    Give duration: <input name="name" type="text" value={this.state.duration} onChange={this._onInputChnage}/>
                 </div>
             </section>
         );
