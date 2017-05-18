@@ -71,7 +71,6 @@ var TableComponent = React.createClass({
         });
     },
 	componentWillReceiveProps: function(nextProps) {
-		console.log(nextProps);
 		var searchText = nextProps.searchTextValue.toUpperCase();
 		var entry, results = [];
 		if(searchText.length > 0) {
