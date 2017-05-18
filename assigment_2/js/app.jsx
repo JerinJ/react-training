@@ -41,29 +41,72 @@ var Rowdata = React.createClass({
         );
     }
 });
+var SearchInput = React.createClass({
+    _onSearchClick: function() {
+        this.props.onSearchChange(this.refs.searchText.value);
+    },
+    render: function() {
+        return (
+            <div className="input-group searchSection">
+                <input type="text" className="form-control" placeholder="Search" aria-describedby="basic-addon2" ref="searchText"/>
+                <span className="input-group-addon" id="basic-addon2" onClick={this._onSearchClick}>Search</span>
+            </div>
+        );
+    }
+});
+var TableComponent = React.createClass({
+    render: function() {
+        return (
+            <table className="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>DisplayOrder</th>
+                        <th>Value Label</th>
+                        <th>Value Type</th>
+                        <th>label</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    {
+                        this.props.tableData.length > 0 ? (
+                            this.props.tableData.map(function(object, i) {
+                                return (
+                                    <Rowdata key={i} rowValues={object} />
+                                );
+                            })
+                        ) : (
+                            <tr>
+                                <td colSpan={6}>No data found</td>
+                            </tr>
+                        )
+                    }
+                </tbody> 
+            </table>
+        );
+    }
+});
 var Content = React.createClass({
     getInitialState: function() {
         return {
             tableData: [],
-            actualData: [],
-            noData: 6
+            actualData: []
         };
     },
     componentDidMount: function() {
         var self = this;
         $.getJSON('/resource/table.json', function (obj) {
-            console.log('jerin', obj);
             self.setState({
                 tableData: obj.ItemList,
                 actualData: obj.ItemList
             });
         });
     },
-    _onSearchClick: function() {
+    onSearchChange: function(searchValue) {
         var results = [];
         var entry;
 
-        var searchText = this.refs.searchText.value.toUpperCase();
+        var searchText = searchValue.toUpperCase();
         if(searchText.length > 0) {
             for (var index = 0; index < this.state.actualData.length; index++) {
                 entry = this.state.actualData[index];
@@ -91,36 +134,8 @@ var Content = React.createClass({
     render: function() {
         return (
             <div>
-                <div className="input-group searchSection">
-                    <input type="text" className="form-control" placeholder="Search" aria-describedby="basic-addon2" ref="searchText"/>
-                    <span className="input-group-addon" id="basic-addon2" onClick={this._onSearchClick}>Search</span>
-                </div>
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>DisplayOrder</th>
-                            <th>Value Label</th>
-                            <th>Value Type</th>
-                            <th>label</th>
-                        </tr> 
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.tableData.length > 0 ? (
-                                this.state.tableData.map(function(object, i) {
-                                    return (
-                                        <Rowdata key={i} rowValues={object} />
-                                    );
-                                })
-                            ) : (
-                                <tr>
-                                    <td colSpan={6}>No data found</td>
-                                </tr>
-                            )
-                        }
-                    </tbody> 
-                </table>
+                <SearchInput onSearchChange={this.onSearchChange} />
+                <TableComponent tableData={this.state.tableData} />
             </div>
         );
     }
