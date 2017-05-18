@@ -60,7 +60,6 @@ var Content = React.createClass({
         });
     },
     _onSearchClick: function() {
-        console.log('jerin value:', this.refs.searchText.value);
         var results = [];
         var entry;
 
@@ -90,10 +89,9 @@ var Content = React.createClass({
         }
     },
     render: function() {
-        var self = this;
         return (
             <div>
-                <div className="input-group">
+                <div className="input-group searchSection">
                     <input type="text" className="form-control" placeholder="Search" aria-describedby="basic-addon2" ref="searchText"/>
                     <span className="input-group-addon" id="basic-addon2" onClick={this._onSearchClick}>Search</span>
                 </div>
@@ -109,8 +107,8 @@ var Content = React.createClass({
                     </thead>
                     <tbody>
                         {
-                            self.state.tableData.length > 0 ? (
-                                self.state.tableData.map(function(object, i) {
+                            this.state.tableData.length > 0 ? (
+                                this.state.tableData.map(function(object, i) {
                                     return (
                                         <Rowdata key={i} rowValues={object} />
                                     );
