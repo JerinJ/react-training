@@ -17,6 +17,70 @@ var App = React.createClass({
         );
     }
 });
+var Rowdata = React.createClass({
+    getDefaultProps: function() {
+        return {
+            rowValues: {
+                DisplayOrder:2,
+                Value:1,
+                ValueByLabel:"Volume Effectiveness",
+                ValueType:"Return",
+                label:"Volume"
+            }
+        }
+    },
+    render: function() {
+        return (
+            <tr>
+                <td>{this.props.rowValues.Value}</td>
+                <td>{this.props.rowValues.DisplayOrder}</td>
+                <td>{this.props.rowValues.ValueByLabel}</td>
+                <td>{this.props.rowValues.ValueType}</td>
+                <td>{this.props.rowValues.label}</td>
+            </tr>
+        );
+    }
+});
+var Content = React.createClass({
+    getInitialState: function() {
+        return {
+            tableData: []
+        };
+    },
+    componentDidMount: function() {
+        var self = this;
+        $.getJSON('/resource/table.json', function (obj) {
+            console.log('jerin', obj);
+            self.setState({
+                tableData: obj.ItemList
+            });
+        });
+    },
+    render: function() {
+        return (
+            <div>
+                <table className="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>DisplayOrder</th>
+                            <th>Value Label</th>
+                            <th>Value Type</th>
+                            <th>label</th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        {this.state.tableData.map(function(object, i){
+                            return (
+                                <Rowdata key={i} rowValues={object} />
+                            );
+                        })}
+                    </tbody> 
+                </table>
+            </div>
+        );
+    }
+});
 var Header = React.createClass({
     getInitialState: function() {
         return {
